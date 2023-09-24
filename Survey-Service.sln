@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{71EDFE14-C790-4008-8969-266306E6AE15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Survey-API", "Survey-API\Survey-API.csproj", "{71EDFE14-C790-4008-8969-266306E6AE15}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{F28B121E-1CD2-466B-84F4-1215C4B41836}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{2EF4B1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{1B665405-700A-4E47-8166-5CCD1C2A6D5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Test", "API.Test\API.Test.csproj", "{6D8FF391-19AB-432B-9130-C6DD62582430}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Survey-API.Test", "Survey-API.Test\Survey-API.Test.csproj", "{6D8FF391-19AB-432B-9130-C6DD62582430}"
 	ProjectSection(ProjectDependencies) = postProject
 		{71EDFE14-C790-4008-8969-266306E6AE15} = {71EDFE14-C790-4008-8969-266306E6AE15}
 	EndProjectSection

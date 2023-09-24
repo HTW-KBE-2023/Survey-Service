@@ -1,0 +1,41 @@
+services:
+  survey_database:
+    platform: linux/x86_64
+    image: mysql
+    container_name: survey_database
+    ports:
+      - "10006:3306"
+    volumes:
+      - ./:/app/
+    environment:
+      MYSQL_DATABASE: SurveyDB
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: user
+    networks:
+      - survey_net
+
+  survey_api:
+    container_name: survey_api
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    ports:
+      - "10004:80"
+      - "10005:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    depends_on:
+      survey_database:
+        condition: service_started
+    volumes:
+      - ./:/app/app
+    links:
+      - survey_database
+    networks:
+      - survey_net
+
+networks:
+  survey_net:
+    name: survey_net
