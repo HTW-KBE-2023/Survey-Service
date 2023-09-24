@@ -16,5 +16,10 @@ namespace API.Utility
             builder.Services.AddTransient<DbInitialiser>();
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
+
+        public static void AddApplicationServices(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddScoped<IGenericService<Survey>, GenericService<Survey>>();
+        }
     }
 }
