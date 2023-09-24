@@ -13,11 +13,12 @@ namespace API.Test.Models.SurveyOptions
         }
 
         [Fact]
-        public void WhenSurveyOptionIsCreatedTextShouldBeNull()
+        public void WhenSurveyOptionIsCreatedTextShouldBeEmpty()
         {
             var option = new SurveyOption();
 
-            Assert.Null(option.Text);
+            Assert.NotNull(option.Text);
+            Assert.Equal(string.Empty, option.Text);
         }
 
         [Fact]

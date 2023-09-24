@@ -11,19 +11,21 @@ public class SurveyTest
     }
 
     [Fact]
-    public void WhenSurveyIsCreatedThenTitelShouldBeNull()
+    public void WhenSurveyIsCreatedThenTitelShouldBeEmpty()
     {
         var survey = new Survey();
 
-        Assert.Null(survey.Title);
+        Assert.NotNull(survey.Title);
+        Assert.Equal(string.Empty, survey.Title);
     }
 
     [Fact]
-    public void WhenSurveyIsCreatedThenDescriptionShouldBeNull()
+    public void WhenSurveyIsCreatedThenDescriptionShouldBeEmpty()
     {
         var survey = new Survey();
 
-        Assert.Null(survey.Description);
+        Assert.NotNull(survey.Description);
+        Assert.Equal(string.Empty, survey.Description);
     }
 
     [Fact]
