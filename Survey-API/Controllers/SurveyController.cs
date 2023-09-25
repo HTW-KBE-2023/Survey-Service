@@ -34,6 +34,8 @@ public class SurveyController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(typeof(SurveyResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ValidationResponse), StatusCodes.Status400BadRequest)]
     public Task<IActionResult> Create([FromBody] CreateSurveyRequest request)
     {
         var survey = _createSurveyRequestToSurveyMapper.Map(request);
@@ -47,6 +49,9 @@ public class SurveyController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [ProducesResponseType(typeof(SurveyResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ValidationResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateSurveyRequest request)
     {
         var survey = _updateSurveyRequestToSurveyMapper.Map(request);
@@ -62,6 +67,8 @@ public class SurveyController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
+    [ProducesResponseType(typeof(SurveyResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public Task<IActionResult> Get([FromRoute] Guid id)
     {
         var survey = _surveyService.GetById(id);
@@ -75,6 +82,7 @@ public class SurveyController : ControllerBase
     }
 
     [HttpGet]
+    [ProducesResponseType(typeof(SurveysResponse), StatusCodes.Status200OK)]
     public Task<IActionResult> GetAll()
     {
         var surveys = _surveyService.GetAll();
@@ -87,6 +95,8 @@ public class SurveyController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public Task<IActionResult> Delete([FromRoute] Guid id)
     {
         var surveys = _surveyService.GetById(id);
