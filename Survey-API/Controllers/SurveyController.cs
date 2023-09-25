@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controller;
 
-[Route("surveys")]
+[Route("api/surveys")]
 [ApiController]
 public class SurveyController : ControllerBase
 {
