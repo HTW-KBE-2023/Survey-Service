@@ -27,7 +27,7 @@ public class VoteOnSurveyChangedConsumer : IConsumer<VoteOnSurveyAdded>
         }
 
         var participant = survey.Participants.FirstOrDefault(option => option.Id == message.ParticipantId);
-        var option = survey.SurveyOptions.FirstOrDefault(option => option.Id == message.OptionIds);
+        var option = survey.SurveyOptions.FirstOrDefault(option => option.Id == message.OptionId);
 
         survey.AddVote(participant, option);
 

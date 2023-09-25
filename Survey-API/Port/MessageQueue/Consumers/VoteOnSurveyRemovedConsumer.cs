@@ -27,7 +27,7 @@ public class VoteOnSurveyRemovedConsumer : IConsumer<VoteOnSurveyRemoved>
         }
 
         var participant = survey.Participants.FirstOrDefault(option => option.Id == message.ParticipantId);
-        var option = survey.SurveyOptions.FirstOrDefault(option => option.Id == message.OptionIds);
+        var option = survey.SurveyOptions.FirstOrDefault(option => option.Id == message.OptionId);
 
         survey.RemoveVote(participant, option);
 
