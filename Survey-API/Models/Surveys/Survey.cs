@@ -13,7 +13,7 @@ namespace API.Models.Surveys
         public IList<Participant> Participants { get; set; } = new List<Participant>();
         public IList<SurveyOption> SurveyOptions { get; set; } = new List<SurveyOption>();
 
-        public void AddVote(Participant participant, SurveyOption option)
+        public void AddVote(Participant? participant, SurveyOption? option)
         {
             if (participant is null || Participants.Contains(participant))
             {
@@ -28,6 +28,23 @@ namespace API.Models.Surveys
 
             Participants.Add(participant);
             selectedOption.TimesSelected++;
+        }
+
+        public void RemoveVote(Participant? participant, SurveyOption? option)
+        {
+            if (participant is null || Participants.Contains(participant))
+            {
+                return;
+            }
+
+            var selectedOption = SurveyOptions.FirstOrDefault(selection => selection.Id == option.Id);
+            if (selectedOption is null)
+            {
+                return;
+            }
+
+            Participants.Remove(participant);
+            selectedOption.TimesSelected--;
         }
     }
 }

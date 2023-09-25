@@ -5,6 +5,7 @@ using API.Port.Repositories;
 using API.Services;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace API.Utility
 {
@@ -23,7 +24,14 @@ namespace API.Utility
 
         public static void AddApplicationServices(this WebApplicationBuilder builder)
         {
-            builder.Services.AddScoped<IGenericService<Survey>, GenericService<Survey>>();
+            builder.Services.AddScoped<GenericService<Survey>>();
+            builder.Services.AddScoped<IGenericService<Survey>, SurveyService>(serviceProvider =>
+            {
+                return new SurveyService(
+                    serviceProvider.GetRequiredService<GenericService<Survey>>(),
+                    serviceProvider.GetRequiredService<SurveyMapper>(),
+                    serviceProvider.GetRequiredService<IBus>());
+            });
         }
 
         public static void AddMapper(this WebApplicationBuilder builder)

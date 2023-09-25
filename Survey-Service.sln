@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Survey-API", "Survey-API\Survey-API.csproj", "{71EDFE14-C790-4008-8969-266306E6AE15}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D6DD9122-34D1-462D-B314-624A8C19BB67} = {D6DD9122-34D1-462D-B314-624A8C19BB67}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{F28B121E-1CD2-466B-84F4-1215C4B41836}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Survey-API.Test", "Survey-A
 		{71EDFE14-C790-4008-8969-266306E6AE15} = {71EDFE14-C790-4008-8969-266306E6AE15}
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessagingContracts", "MessageQueueContracts\MessagingContracts.csproj", "{D6DD9122-34D1-462D-B314-624A8C19BB67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +39,10 @@ Global
 		{6D8FF391-19AB-432B-9130-C6DD62582430}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D8FF391-19AB-432B-9130-C6DD62582430}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D8FF391-19AB-432B-9130-C6DD62582430}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6DD9122-34D1-462D-B314-624A8C19BB67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6DD9122-34D1-462D-B314-624A8C19BB67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6DD9122-34D1-462D-B314-624A8C19BB67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6DD9122-34D1-462D-B314-624A8C19BB67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +50,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{71EDFE14-C790-4008-8969-266306E6AE15} = {2EF4B123-D0C3-487D-9E51-5E3D4E153838}
 		{6D8FF391-19AB-432B-9130-C6DD62582430} = {1B665405-700A-4E47-8166-5CCD1C2A6D5E}
+		{D6DD9122-34D1-462D-B314-624A8C19BB67} = {2EF4B123-D0C3-487D-9E51-5E3D4E153838}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6717C30F-C548-4D50-B379-EA1D80FA9F56}

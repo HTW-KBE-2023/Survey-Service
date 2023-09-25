@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Port\MessageQueue\" />
+    <ProjectReference Include="..\MessageQueueContracts\MessagingContracts.csproj" />
   </ItemGroup>
 
 </Project>
