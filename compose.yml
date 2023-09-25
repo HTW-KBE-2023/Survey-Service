@@ -19,7 +19,7 @@ services:
     container_name: survey_api
     build:
       context: .
-      dockerfile: API/Dockerfile
+      dockerfile: Survey-API/Dockerfile
     ports:
       - "10004:80"
       - "10005:443"
