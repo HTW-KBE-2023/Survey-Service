@@ -5,12 +5,12 @@ using MessagingContracts.Survey;
 
 namespace API.Port.MessageQueue.Consumers;
 
-public class VoteOnSurveyChangedConsumer : IConsumer<VoteOnSurveyAdded>
+public class VoteOnSurveyAddedConsumer : IConsumer<VoteOnSurveyAdded>
 {
-    private readonly ILogger<VoteOnSurveyAdded> _logger;
+    private readonly ILogger<VoteOnSurveyAddedConsumer> _logger;
     private readonly IGenericService<Survey> _surveyService;
 
-    public VoteOnSurveyChangedConsumer(ILogger<VoteOnSurveyAdded> logger, IGenericService<Survey> surveyService)
+    public VoteOnSurveyAddedConsumer(ILogger<VoteOnSurveyAddedConsumer> logger, IGenericService<Survey> surveyService)
     {
         _logger = logger;
         _surveyService = surveyService;
