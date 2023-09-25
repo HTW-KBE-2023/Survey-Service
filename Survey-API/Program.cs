@@ -1,11 +1,15 @@
 using API.Utility;
 using FluentValidation;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.AddDatabaseConfiguration();
+builder.AddRabbitMqConfiguration();
+
+builder.AddHealthChecksConfiguration();
+
 builder.AddApplicationServices();
 builder.AddMapper();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>(ServiceLifetime.Singleton);
@@ -26,6 +30,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapHealthChecks("/api/health", new HealthCheckOptions()
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
+
 app.MapControllers();
 
 app.Run();
