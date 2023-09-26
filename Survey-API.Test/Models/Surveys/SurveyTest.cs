@@ -43,12 +43,4 @@ public class SurveyTest
 
         Assert.Empty(survey.SurveyOptions);
     }
-
-    [Fact]
-    public void WhenSurveyOptionIsCreatedThenParticipantsShouldBeEmpty()
-    {
-        var survey = new Survey();
-
-        Assert.Empty(survey.Participants);
-    }
 }

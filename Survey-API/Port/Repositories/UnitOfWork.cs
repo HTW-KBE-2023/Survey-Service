@@ -1,5 +1,4 @@
 ﻿using API.Models;
-using API.Models.Participants;
 using API.Models.SurveyOptions;
 using API.Models.Surveys;
 using API.Port.Database;
@@ -16,7 +15,6 @@ namespace API.Port.Repositories
 
         private IGenericRepository<Survey>? _surveyRepository;
         private IGenericRepository<SurveyOption> _surveyOptionRepository;
-        private IGenericRepository<Participant> _participantRepository;
 
         public UnitOfWork(SurveyContext context)
         {
@@ -24,7 +22,6 @@ namespace API.Port.Repositories
 
             _genericRepositories.Add(new GenericRepository<Survey>(_context));
             _genericRepositories.Add(new GenericRepository<SurveyOption>(_context));
-            _genericRepositories.Add(new GenericRepository<Participant>(_context));
         }
 
         public IGenericRepository<Survey> SurveyRepository
@@ -42,15 +39,6 @@ namespace API.Port.Repositories
             {
                 _surveyOptionRepository ??= GetGenericRepository<SurveyOption>();
                 return _surveyOptionRepository;
-            }
-        }
-
-        public IGenericRepository<Participant> ParticipantRepository
-        {
-            get
-            {
-                _participantRepository ??= GetGenericRepository<Participant>();
-                return _participantRepository;
             }
         }
 

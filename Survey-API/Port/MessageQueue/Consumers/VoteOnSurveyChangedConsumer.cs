@@ -5,7 +5,7 @@ using MessagingContracts.Survey;
 
 namespace API.Port.MessageQueue.Consumers;
 
-public class VoteOnSurveyAddedConsumer : IConsumer<VoteOnSurveyAdded>
+public class VoteOnSurveyAddedConsumer : IConsumer<VoteOnSurveyChanged>
 {
     private readonly ILogger<VoteOnSurveyAddedConsumer> _logger;
     private readonly IGenericService<Survey> _surveyService;
@@ -16,7 +16,7 @@ public class VoteOnSurveyAddedConsumer : IConsumer<VoteOnSurveyAdded>
         _surveyService = surveyService;
     }
 
-    public Task Consume(ConsumeContext<VoteOnSurveyAdded> context)
+    public Task Consume(ConsumeContext<VoteOnSurveyChanged> context)
     {
         var message = context.Message;
 
@@ -25,11 +25,10 @@ public class VoteOnSurveyAddedConsumer : IConsumer<VoteOnSurveyAdded>
         {
             return Task.CompletedTask;
         }
-
-        var participant = survey.Participants.FirstOrDefault(option => option.Id == message.ParticipantId);
-        var option = survey.SurveyOptions.FirstOrDefault(option => option.Id == message.OptionId);
-
-        survey.AddVote(participant, option);
+        foreach (var (optionId, change) in message.Changes)
+        {
+            survey.ChangeVote(optionId, change);
+        }
 
         _surveyService.Update(survey);
 

@@ -1,4 +1,3 @@
-using API.Models.Participants;
 using API.Models.SurveyOptions;
 using API.Models.Surveys;
 using API.Port.Database;
@@ -39,10 +38,6 @@ namespace API.Test.Services
             {
                 Completed = false,
                 Title = "Nice Survey!",
-                Participants =
-                {
-                    new()
-                },
                 SurveyOptions =
                 {
                     new() {
@@ -76,8 +71,7 @@ namespace API.Test.Services
 
             var survey = new Survey()
             {
-                Id = Guid.Empty,
-                Participants = null,
+                Id = Guid.Empty
             };
 
             IGenericService<Survey> surveyService = new GenericService<Survey>(unitOfWork, surveyValidator);
@@ -96,7 +90,7 @@ namespace API.Test.Services
                 },
                 failure =>
                 {
-                    Assert.Equal(4, failure.Errors.Count());
+                    Assert.Equal(3, failure.Errors.Count());
                     return true;
                 }
             );
@@ -109,7 +103,6 @@ namespace API.Test.Services
         {
             var surveyValidator = new SurveyValidator();
 
-            Participant participant = new();
             SurveyOption option = new() { Position = 1, Text = "Option 1", TimesSelected = 0 };
 
             var survey = new Survey()
@@ -122,25 +115,22 @@ namespace API.Test.Services
                 }
             };
 
-            _context.Add(participant);
             _context.Add(survey);
             _context.SaveChanges();
 
-            Assert.Empty(_context.Surveys.First().Participants);
             Assert.Equal(0, _context.Surveys.First().SurveyOptions.First().TimesSelected);
 
             var unitOfWork = new UnitOfWork(_context);
 
             IGenericService<Survey> surveyService = new GenericService<Survey>(unitOfWork, surveyValidator);
 
-            survey.AddVote(participant, option);
+            survey.ChangeVote(option.Id, 1);
 
             var result = surveyService.Update(survey);
 
             Assert.True(result.IsSuccess);
             Assert.False(result.IsError);
             Assert.Equal(survey, result.Value);
-            Assert.Single(_context.Surveys.First().Participants);
             Assert.Equal(1, _context.Surveys.First().SurveyOptions.First().TimesSelected);
         }
 
@@ -150,7 +140,6 @@ namespace API.Test.Services
             var surveyValidator = new SurveyValidator();
             var unitOfWork = new UnitOfWork(_context);
 
-            Participant participant = new();
             SurveyOption option = new() { Position = 1, Text = "Option 1", TimesSelected = 0 };
 
             var survey = new Survey()
@@ -165,12 +154,11 @@ namespace API.Test.Services
             _context.Add(survey);
             _context.SaveChanges();
 
-            Assert.Empty(_context.Surveys.First().Participants);
             Assert.Equal(0, _context.Surveys.First().SurveyOptions.First().TimesSelected);
 
             IGenericService<Survey> surveyService = new GenericService<Survey>(unitOfWork, surveyValidator);
 
-            survey.AddVote(participant, option);
+            survey.ChangeVote(option.Id, 1);
 
             var result = surveyService.Update(survey);
 

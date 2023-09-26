@@ -24,7 +24,6 @@ public class SurveyMapper :
         destination.Description = source.Description;
         destination.Completed = source.Completed;
         destination.SurveyOptions = source.SurveyOptions;
-        destination.Participants = source.Participants;
     }
 
     public void Map(CreateSurveyRequest source, Survey destination)

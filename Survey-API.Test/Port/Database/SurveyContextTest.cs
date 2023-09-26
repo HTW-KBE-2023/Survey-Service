@@ -30,7 +30,6 @@ namespace API.Test.Port.Database
         {
             Assert.Empty(_context.Surveys);
             Assert.Empty(_context.SurveyOptions);
-            Assert.Empty(_context.Participants);
         }
     }
 }

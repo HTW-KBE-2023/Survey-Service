@@ -1,5 +1,4 @@
 ﻿using API.Models;
-using API.Models.Participants;
 using API.Models.SurveyOptions;
 using API.Models.Surveys;
 using API.Port.Database;
@@ -55,22 +54,13 @@ namespace API.Test.Port.Repositories
         }
 
         [Fact]
-        public void WhenUnitOfWorkIsCreatedThenContainParticipantRepository()
-        {
-            UnitOfWork unitOfWork = new(_context);
-
-            Assert.NotNull(unitOfWork.ParticipantRepository);
-            Assert.IsAssignableFrom<IGenericRepository<Participant>>(unitOfWork.ParticipantRepository);
-        }
-
-        [Fact]
         public void WhenGetRepositoryThatsRegistersThenSearchedRepositoryShouldBeReturned()
         {
             IUnitOfWork unitOfWork = new UnitOfWork(_context);
 
-            var participantRepository = unitOfWork.GetGenericRepository<Participant>();
+            var surveyOptionRepository = unitOfWork.GetGenericRepository<SurveyOption>();
 
-            Assert.IsAssignableFrom<IGenericRepository<Participant>>(participantRepository);
+            Assert.IsAssignableFrom<IGenericRepository<SurveyOption>>(surveyOptionRepository);
         }
 
         [Fact]

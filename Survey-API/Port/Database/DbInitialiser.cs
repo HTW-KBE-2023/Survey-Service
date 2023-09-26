@@ -1,5 +1,4 @@
-﻿using API.Models.Participants;
-using API.Models.SurveyOptions;
+﻿using API.Models.SurveyOptions;
 using API.Models.Surveys;
 
 namespace API.Port.Database
@@ -21,12 +20,6 @@ namespace API.Port.Database
 
         private void AddTestData()
         {
-            var participant = new Participant()
-            {
-                Id = Guid.NewGuid()
-            };
-            _context.Add(participant);
-
             var pollOption1 = new SurveyOption()
             {
                 Id = Guid.NewGuid(),
@@ -51,7 +44,6 @@ namespace API.Port.Database
                 Title = "Nice Survey",
                 Description = "Do you like this Test Survey?",
                 Completed = false,
-                Participants = new List<Participant>() { participant },
                 SurveyOptions = new List<SurveyOption>() { pollOption1, pollOption2 }
             });
 
