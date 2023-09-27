@@ -64,17 +64,12 @@ namespace API.Port.Repositories
                 return;
             }
 
-            if (_context.Entry(entityToDelete).State == EntityState.Detached)
-            {
-                _dbSet.Attach(entityToDelete);
-            }
             _dbSet.Remove(entityToDelete);
         }
 
         public virtual void Update(TEntity entityToUpdate)
         {
-            _dbSet.Attach(entityToUpdate);
-            _dbSet.Entry(entityToUpdate).State = EntityState.Modified;
+            _dbSet.Update(entityToUpdate);
         }
     }
 }
