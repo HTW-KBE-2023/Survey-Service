@@ -1,4 +1,5 @@
-﻿using API.Models.Surveys;
+﻿using API.Models.SurveyOptions;
+using API.Models.Surveys;
 using API.Port.Database;
 using API.Port.Repositories;
 using API.Services;
@@ -32,6 +33,7 @@ namespace API
                     serviceProvider.GetRequiredService<SurveyMapper>(),
                     serviceProvider.GetRequiredService<IBus>());
             });
+            builder.Services.AddScoped<IGenericService<SurveyOption>, GenericService<SurveyOption>>();
         }
 
         public static void AddMapper(this WebApplicationBuilder builder)
