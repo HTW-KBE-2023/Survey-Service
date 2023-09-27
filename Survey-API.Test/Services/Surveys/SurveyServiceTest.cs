@@ -72,7 +72,7 @@ namespace API.Test.Services.Surveys
         }
 
         [Fact]
-        public void WhenUpdateIsCalledThenTheUnderlyingServiceShouldBeCalled()
+        public void WhenUpdateIsCalledThenTheUnderlyingServiceShouldBeCalledAndMessagePublished()
         {
             var survey = new Survey()
             {
@@ -98,12 +98,14 @@ namespace API.Test.Services.Surveys
             var fakeBus = new Mock<IBus>();
             var fakeGenericService = new Mock<IGenericService<Survey>>();
 
+            fakeBus.Setup(mock => mock.Publish(It.IsAny<SurveyUpdated>(), default)).Verifiable(Times.Once);
             fakeGenericService.Setup(mock => mock.Update(survey)).Verifiable(Times.Once);
 
             SurveyService service = new(fakeGenericService.Object, mapper, fakeBus.Object);
 
             service.Update(survey);
 
+            fakeBus.Verify();
             fakeGenericService.Verify();
         }
 

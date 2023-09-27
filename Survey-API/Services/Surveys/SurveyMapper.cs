@@ -11,6 +11,7 @@ public class SurveyMapper :
     IMapper<Survey, SurveyResponse>,
     IMapper<SurveyCreated, Survey>,
     IMapper<Survey, SurveyCreated>,
+    IMapper<Survey, SurveyUpdated>,
     IMapper<CreateSurveyRequest, Survey>,
     IMapper<UpdateSurveyRequest, Survey>
 {
@@ -56,6 +57,15 @@ public class SurveyMapper :
         destination.SurveyId = source.Id;
         destination.Title = source.Title;
         destination.Description = source.Description;
+        destination.SurveyOptions = _toMessageQueueMapper.MapList(source.SurveyOptions);
+    }
+
+    public void Map(Survey source, SurveyUpdated destination)
+    {
+        destination.SurveyId = source.Id;
+        destination.Title = source.Title;
+        destination.Description = source.Description;
+        destination.Completed = source.Completed;
         destination.SurveyOptions = _toMessageQueueMapper.MapList(source.SurveyOptions);
     }
 }
