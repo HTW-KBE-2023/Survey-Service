@@ -4,6 +4,7 @@ using API.Port.Database;
 using API.Port.Repositories;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
+using Services.Surveys;
 
 namespace API.Test.Services
 {
@@ -38,6 +39,7 @@ namespace API.Test.Services
             {
                 Completed = false,
                 Title = "Nice Survey!",
+                Description = "Description",
                 SurveyOptions =
                 {
                     new() {

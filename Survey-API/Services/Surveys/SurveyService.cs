@@ -1,12 +1,12 @@
 ﻿using API.Models;
 using API.Models.Surveys;
 using API.Models.Validations;
-using API.Utility;
+using API.Services;
 using Boxed.Mapping;
 using MassTransit;
 using MessagingContracts.Survey;
 
-namespace API.Services
+namespace Services.Surveys
 {
     public class SurveyService : IGenericService<Survey>
     {

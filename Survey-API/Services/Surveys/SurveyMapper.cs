@@ -5,7 +5,7 @@ using API.Models.Surveys.Responses;
 using Boxed.Mapping;
 using MessagingContracts.Survey;
 
-namespace API.Models.Surveys;
+namespace Services.Surveys;
 
 public class SurveyMapper :
     IMapper<Survey, SurveyResponse>,
@@ -14,8 +14,8 @@ public class SurveyMapper :
     IMapper<CreateSurveyRequest, Survey>,
     IMapper<UpdateSurveyRequest, Survey>
 {
-    private readonly IMapper<SurveyOption, SurveyCreated.SurveyOption> _toMessageQueueMapper = new SurveyOptionMapper();
-    private readonly IMapper<SurveyCreated.SurveyOption, SurveyOption> _fromMessageQueueMapper = new SurveyOptionMapper();
+    private readonly IMapper<SurveyOption, Option> _toMessageQueueMapper = new SurveyOptionMapper();
+    private readonly IMapper<Option, SurveyOption> _fromMessageQueueMapper = new SurveyOptionMapper();
 
     public void Map(Survey source, SurveyResponse destination)
     {

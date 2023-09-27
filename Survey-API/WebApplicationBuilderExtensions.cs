@@ -1,11 +1,11 @@
 ﻿using API.Models.Surveys;
-using API.Models.Validations;
 using API.Port.Database;
 using API.Port.Repositories;
 using API.Services;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Services.Surveys;
+using Services.Validations;
 
 namespace API.Utility
 {

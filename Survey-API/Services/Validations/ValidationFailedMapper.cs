@@ -1,7 +1,8 @@
-﻿using API.Models.Validations.Responses;
+﻿using API.Models.Validations;
+using API.Models.Validations.Responses;
 using Boxed.Mapping;
 
-namespace API.Models.Validations;
+namespace Services.Validations;
 
 public class ValidationFailedMapper : IMapper<ValidationFailed, ValidationFailureResponse>
 {

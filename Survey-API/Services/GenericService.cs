@@ -1,8 +1,8 @@
 ﻿using API.Models;
 using API.Models.Validations;
 using API.Port.Repositories;
-using API.Utility;
 using FluentValidation;
+using Services;
 
 namespace API.Services
 {

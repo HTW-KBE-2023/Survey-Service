@@ -2,7 +2,7 @@
 using Boxed.Mapping;
 using FluentValidation.Results;
 
-namespace API.Models.Validations;
+namespace Services.Validations;
 
 public class ValidationFailureMapper : IMapper<ValidationFailure, ValidationResponse>
 {

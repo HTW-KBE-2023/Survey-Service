@@ -136,5 +136,13 @@ namespace API.Test.Port.Repositories
 
             Assert.Equal("Updated Text", _context.SurveyOptions.Find(_option2.Id)?.Text);
         }
+
+        [Fact]
+        public void WhenContextIsNullThenConstructorShouldThrowArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(() => new GenericRepository<SurveyOption>(null));
+
+            Assert.Equal("context", exception.ParamName);
+        }
     }
 }

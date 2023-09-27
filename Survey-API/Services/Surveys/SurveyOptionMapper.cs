@@ -2,11 +2,11 @@
 using Boxed.Mapping;
 using MessagingContracts.Survey;
 
-namespace API.Models.Surveys;
+namespace Services.Surveys;
 
-public class SurveyOptionMapper : IMapper<SurveyCreated.SurveyOption, SurveyOption>, IMapper<SurveyOption, SurveyCreated.SurveyOption>
+public class SurveyOptionMapper : IMapper<Option, SurveyOption>, IMapper<SurveyOption, Option>
 {
-    public void Map(SurveyCreated.SurveyOption source, SurveyOption destination)
+    public void Map(Option source, SurveyOption destination)
     {
         destination.Id = source.SurveyOptionId;
         destination.Text = source.Text;
@@ -14,7 +14,7 @@ public class SurveyOptionMapper : IMapper<SurveyCreated.SurveyOption, SurveyOpti
         destination.Position = source.Position;
     }
 
-    public void Map(SurveyOption source, SurveyCreated.SurveyOption destination)
+    public void Map(SurveyOption source, Option destination)
     {
         destination.SurveyOptionId = source.Id;
         destination.Text = source.Text;

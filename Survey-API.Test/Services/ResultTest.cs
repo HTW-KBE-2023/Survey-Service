@@ -1,8 +1,6 @@
-﻿using API.Models.Validations.Responses;
-using API.Models.Validations;
-using Boxed.Mapping;
+﻿using Services;
 
-namespace API.Utility;
+namespace API.Test.Services;
 
 public class ResultTest
 {

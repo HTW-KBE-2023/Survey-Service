@@ -1,9 +1,9 @@
 using API.Models.Validations.Responses;
-using API.Models.Validations;
 using Boxed.Mapping;
 using FluentValidation.Results;
+using Services.Validations;
 
-namespace API.Test.Models.Validations
+namespace API.Test.Services.Validation
 {
     public class ValidationFailureMapperTest
 

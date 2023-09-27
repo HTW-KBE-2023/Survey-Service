@@ -7,8 +7,6 @@ namespace API.Port.Repositories
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private bool _disposed = false;
-
         private readonly SurveyContext _context;
 
         private readonly ICollection<object> _genericRepositories = new List<object>();
@@ -44,11 +42,8 @@ namespace API.Port.Repositories
 
         public IGenericRepository<TEntity> GetGenericRepository<TEntity>() where TEntity : IEntity
         {
-            var genericRepository = _genericRepositories.OfType<IGenericRepository<TEntity>>().SingleOrDefault();
-            if (genericRepository is null)
-            {
-                throw new ArgumentException($"No Repository for the Type {typeof(TEntity).Name} could be found!");
-            }
+            var genericRepository = _genericRepositories.OfType<IGenericRepository<TEntity>>().SingleOrDefault()
+                ?? throw new ArgumentException($"No Repository for the Type {typeof(TEntity).Name} could be found!");
 
             return genericRepository;
         }
@@ -58,21 +53,9 @@ namespace API.Port.Repositories
             _context.SaveChanges();
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                if (disposing)
-                {
-                    _context.Dispose();
-                }
-            }
-            _disposed = true;
-        }
-
         public void Dispose()
         {
-            Dispose(true);
+            _context.Dispose();
             GC.SuppressFinalize(this);
         }
     }

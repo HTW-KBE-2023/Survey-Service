@@ -1,4 +1,4 @@
-﻿namespace API.Utility;
+﻿namespace Services;
 
 public readonly struct Result<TValue, TError>
 {

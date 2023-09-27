@@ -1,4 +1,6 @@
-﻿namespace API.Models.Surveys;
+﻿using API.Models.Surveys;
+
+namespace API.Test.Models.Surveys;
 
 public class SurveyTest
 {
