@@ -1,28 +1,50 @@
-﻿using API.Models.Surveys;
+﻿using API.Models.SurveyOptions;
+using API.Models.Surveys;
 using API.Port.MessageQueue.Consumers;
 using API.Services;
-using Castle.Core.Logging;
 using MassTransit;
 using MessagingContracts.Survey;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Services.Surveys;
 
 namespace API.Test.Port.MessageQueue.Consumers;
 
 public class VoteOnSurveyAddedConsumerTest
 {
-    //[Fact]
-    //public void WhenContextIsCreatedThenContainsOneSetForeachModel()
-    //{
-    //    var fakeLogger = new Mock<ILogger<VoteOnSurveyAddedConsumer>>();
-    //    var fakeService = new Mock<>();
+    [Fact]
+    public void WhenContextIsCreatedThenContainsOneSetForeachModel()
+    {
+        var survey = new Survey()
+        {
+            Id = Guid.NewGuid(),
+            SurveyOptions = new List<SurveyOption>()
+            {
+                new (){ Id = Guid.NewGuid(), TimesSelected = 0 }
+            }
+        };
 
-    // var service = new SurveyService();
+        var fakeLogger = new Mock<ILogger<VoteOnSurveyAddedConsumer>>();
+        var fakeGenericService = new Mock<IGenericService<Survey>>();
 
-    // VoteOnSurveyAddedConsumer a = new VoteOnSurveyAddedConsumer(fakeLogger.Object, fakeService.Object);
+        fakeGenericService.Setup(mock => mock.GetById(It.IsAny<Guid>())).Verifiable(Times.Once);
+        fakeGenericService.Setup(mock => mock.Update(It.IsAny<Survey>())).Verifiable(Times.Once);
 
-    //    a.Consume();
-    //}
+        fakeGenericService.Setup(mock => mock.GetById(It.IsAny<Guid>())).Returns(survey);
+
+        var fakeContext = new Mock<ConsumeContext<VoteOnSurveyChanged>>();
+
+        fakeContext.Setup(mock => mock.Message).Returns(new VoteOnSurveyChanged()
+        {
+            SurveyId = survey.Id,
+            Changes = new List<(Guid, int)>() {
+                (survey.SurveyOptions.First().Id, 1)
+            }
+        });
+
+        var consumer = new VoteOnSurveyAddedConsumer(fakeLogger.Object, fakeGenericService.Object);
+
+        consumer.Consume(fakeContext.Object);
+
+        fakeGenericService.Verify();
+    }
 }
