@@ -46,5 +46,6 @@ public class VoteOnSurveyAddedConsumerTest
         consumer.Consume(fakeContext.Object);
 
         fakeGenericService.Verify();
+        Assert.Equal(1, survey.SurveyOptions.First().TimesSelected);
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Services.Surveys;
 using Services.Validations;
 
-namespace API.Utility
+namespace API
 {
     public static class WebApplicationBuilderExtensions
     {

@@ -1,4 +1,4 @@
-using API.Utility;
+using API;
 using FluentValidation;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;

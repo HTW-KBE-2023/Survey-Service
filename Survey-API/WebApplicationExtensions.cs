@@ -1,6 +1,6 @@
 ﻿using API.Port.Database;
 
-namespace API.Utility
+namespace API
 {
     public static class WebApplicationExtensions
     {
