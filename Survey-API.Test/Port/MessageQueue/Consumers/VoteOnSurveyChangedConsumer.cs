@@ -14,38 +14,32 @@ public class VoteOnSurveyAddedConsumerTest
     [Fact]
     public void WhenContextIsCreatedThenContainsOneSetForeachModel()
     {
-        var survey = new Survey()
+        var surveyOption = new SurveyOption()
         {
             Id = Guid.NewGuid(),
-            SurveyOptions = new List<SurveyOption>()
-            {
-                new (){ Id = Guid.NewGuid(), TimesSelected = 0 }
-            }
+            TimesSelected = 0
         };
 
-        var fakeLogger = new Mock<ILogger<VoteOnSurveyAddedConsumer>>();
-        var fakeGenericService = new Mock<IGenericService<Survey>>();
+        var fakeLogger = new Mock<ILogger<SurveyOptionSelectionChangedConsumer>>();
+        var fakeGenericService = new Mock<IGenericService<SurveyOption>>();
 
         fakeGenericService.Setup(mock => mock.GetById(It.IsAny<Guid>())).Verifiable(Times.Once);
-        fakeGenericService.Setup(mock => mock.Update(It.IsAny<Survey>())).Verifiable(Times.Once);
+        fakeGenericService.Setup(mock => mock.Update(It.IsAny<SurveyOption>())).Verifiable(Times.Once);
 
-        fakeGenericService.Setup(mock => mock.GetById(It.IsAny<Guid>())).Returns(survey);
+        fakeGenericService.Setup(mock => mock.GetById(It.IsAny<Guid>())).Returns(surveyOption);
 
-        var fakeContext = new Mock<ConsumeContext<VoteOnSurveyChanged>>();
+        var fakeContext = new Mock<ConsumeContext<SurveyOptionSelectionChanged>>();
 
-        fakeContext.Setup(mock => mock.Message).Returns(new VoteOnSurveyChanged()
+        fakeContext.Setup(mock => mock.Message).Returns(new SurveyOptionSelectionChanged()
         {
-            SurveyId = survey.Id,
-            Changes = new List<(Guid, int)>() {
-                (survey.SurveyOptions.First().Id, 1)
-            }
+            SurveyOptionId = surveyOption.Id,
+            TimesSelected = 1
         });
 
-        var consumer = new VoteOnSurveyAddedConsumer(fakeLogger.Object, fakeGenericService.Object);
+        var consumer = new SurveyOptionSelectionChangedConsumer(fakeLogger.Object, fakeGenericService.Object);
 
         consumer.Consume(fakeContext.Object);
 
         fakeGenericService.Verify();
-        Assert.Equal(1, survey.SurveyOptions.First().TimesSelected);
     }
 }

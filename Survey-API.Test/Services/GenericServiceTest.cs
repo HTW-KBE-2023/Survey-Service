@@ -126,14 +126,14 @@ namespace API.Test.Services
 
             IGenericService<Survey> surveyService = new GenericService<Survey>(unitOfWork, surveyValidator);
 
-            survey.ChangeVote(option.Id, 1);
+            survey.Title = "Test";
 
             var result = surveyService.Update(survey);
 
             Assert.True(result.IsSuccess);
             Assert.False(result.IsError);
             Assert.Equal(survey, result.Value);
-            Assert.Equal(1, _context.Surveys.First().SurveyOptions.First().TimesSelected);
+            Assert.Equal("Test", result.Value.Title);
         }
 
         [Fact]
@@ -160,7 +160,7 @@ namespace API.Test.Services
 
             IGenericService<Survey> surveyService = new GenericService<Survey>(unitOfWork, surveyValidator);
 
-            survey.ChangeVote(option.Id, 1);
+            survey.Description = "";
 
             var result = surveyService.Update(survey);
 
